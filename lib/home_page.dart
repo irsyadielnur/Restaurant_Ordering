@@ -3,6 +3,8 @@ import 'menu_data.dart';
 import 'order_page.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Menu Restaurant")),
+      appBar: AppBar(title: const Text("Menu Restaurant")),
       body: Column(
         children: [
           Expanded(
@@ -52,14 +54,15 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.shopping_cart),
+        child: const Icon(Icons.shopping_cart),
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => OrderPage(
                 selectedItems: cart,
-                onOrderConfirmed: clearCart, // Callback untuk mengosongkan keranjang
+                onOrderConfirmed:
+                    clearCart, // Callback untuk mengosongkan keranjang
               ),
             ),
           );
@@ -74,7 +77,8 @@ class CategorySection extends StatelessWidget {
   final List<MenuItem> menuList;
   final Function(MenuItem) onAddToCart;
 
-  CategorySection({
+  const CategorySection({
+    super.key,
     required this.title,
     required this.menuList,
     required this.onAddToCart,
@@ -88,10 +92,10 @@ class CategorySection extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
-        Container(
+        SizedBox(
           height: 250,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -99,7 +103,7 @@ class CategorySection extends StatelessWidget {
             itemBuilder: (context, index) {
               var menu = menuList[index];
               return Card(
-                margin: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     Image.asset(menu.image, width: 150, height: 150),
@@ -107,7 +111,7 @@ class CategorySection extends StatelessWidget {
                     Text("Rp ${menu.price}"),
                     ElevatedButton(
                       onPressed: () => onAddToCart(menu),
-                      child: Text("Add to Cart"),
+                      child: const Text("Add to Cart"),
                     ),
                   ],
                 ),
